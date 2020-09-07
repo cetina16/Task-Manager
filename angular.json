@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css"            
             ],
             "scripts": []
           },
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "mytaskmanager"
+    }
+  },
+  "defaultProject": "mytaskmanager",
+  "cli": {
+    "analytics": "d2b0b785-dd30-4c58-a51f-7b63cde8d7f9"
+  }
 }

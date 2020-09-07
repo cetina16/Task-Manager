@@ -1,0 +1,62 @@
+<h2> {{currentDate | date: 'fullDate'}} </h2>
+<div>
+  <button (click)="PrevMonth()">Previous Month</button>
+  <span style= "color:orangered;font-weight: bold"> {{ month.title }} {{ month.year}} </span>
+  <button (click)="NextMonth()">Next Month</button>
+</div>
+<br>
+<table style="width:60%">
+  <tr style="color:orangered">
+    <th *ngFor='let d of weekDays' [ngClass]="d.style" >{{ d.title }}</th>
+  </tr>
+  <tr *ngFor='let w of month.weeks'>
+    <td *ngFor='let day of w.days'> 
+      <button  [hidden]='!day.title' (click)="SelectDay(day)"> {{ day.title }} </button>  
+    </td>
+  </tr>
+
+</table>
+<ng-template #TaskBlock>
+  <p style = "color:darkorange;"> Tasks on {{ month.title}} {{ selectedDay.title }}: </p>
+  <table >
+    <tr>
+      <th> Title </th>
+      <th> Note </th>
+    </tr>
+    
+    <tr *ngFor='let task of selectedDay.tasks'>
+      <td> 
+        <input [disabled]="task.mode === 'show'" [(ngModel)]="task.title" type="text">  
+      </td>
+     
+      <td>
+        <input [disabled]="task.mode === 'show'"  [(ngModel)]="task.note" type="text">
+      </td>
+ 
+      <td> 
+        <button *ngIf="task.state === 'show'" (click)="EditTask(task)"> Edit </button>
+        <button *ngIf="task.state === 'edit'" (click)="SaveTask(task)"> Save </button>  
+        <button *ngIf="task.state === 'show'" (click)="DeleteTask(task)"> Delete </button> 
+        <button *ngIf="task.state === 'deleted'" > Deleted </button>   
+
+      </td>
+
+    </tr>
+
+  </table>
+</ng-template>
+<ng-template #NonBlock>
+  <p style = "color:darkorange;"> {{ month.title}} {{ selectedDay.title }}  : There is no task yet. </p>
+</ng-template>
+
+<div *ngIf='selectedDay'>
+  <div *ngIf= "selectedDay.tasks.length > 0; then TaskBlock; else NonBlock"></div>
+
+  <div>
+    <input [(ngModel)]="newTask.title" type="text" >
+    <input [(ngModel)]="newTask.note" type="text">
+  
+    <button  (click)="AddTask()"> Add Task</button>  
+  </div>
+  
+</div>
