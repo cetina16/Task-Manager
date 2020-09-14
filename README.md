@@ -1,6 +1,7 @@
 # Mytaskmanager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
+![Image of Screens](https://github.com/cetina16/mytaskmanager/blob/master/1.PNG)
 
 ## Development server
 
